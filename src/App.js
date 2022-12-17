@@ -17,7 +17,6 @@ function App() {
 
   const wordsArea = useRef()
   const tensesArea = useRef()
-  const generator = useRef()
 
   useEffect(() => {
     setWords(arr)
@@ -32,11 +31,6 @@ function App() {
     e.preventDefault()
     let newWords = wordsArea.current.value.split(", ")
     setWords(newWords)
-  }
-  function submitTensesArea(e) {
-    e.preventDefault()
-    let newTenses = tensesArea.current.value.split(", ")
-    setTenses(newTenses)
   }
 
   function addWordsToFlashcards(wrds, tnss) {
@@ -66,53 +60,30 @@ function App() {
     setChecked(!checked)
   };
   // TO DO:
-  // add a dropdown with tenses
   // add a buton to chose which person should be on the card (otherwise random)
-  function generateTense(e) {
-    e.preventDefault();
-    // flashcards.forEach(flashcard => console.log(convert(flashcard.word, flashcard.tense)))
 
-    // function shuffle(array) {
-    // for (let i = array.length - 1; i > 0; i--) {
-    //   let j = Math.floor(Math.random() * (i + 1));
-    //   [array[i], array[j]] = [array[j], array[i]];
-    // }
-    // console.log([...array])
-    // }
-  }
   return (
     <div >
       <div className="top">
         <section className="features">
           <section className="words">
             <form onSubmit={submitWordsArea}>
-              <label htmlFor="words">Words</label>
+              <label htmlFor="words">Verbos</label>
               <textarea rows="3" ref={wordsArea} name="words" ></textarea>
-              <button className="btn" type="submit">Submit</button>
+              <button className="btn" type="submit">Enviar</button>
             </form>
           </section>
           <MultiSelect setTenses={setTenses} />
-          {/* <section className="tenses">
-        <form onSubmit={(e) => submitTensesArea(e)}>
-          <label htmlFor="tenses">Tenses</label>
-          <textarea ref={tensesArea} name="tenses"></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </section> */}
-          <p>Chosen words: </p>
+          <p>Verbos elegidos: </p>
           <div className="box"> {words.join(", ")}</div>
-          <p>Chosen tenses: </p>
+          <p>Tiempos elegidos: </p>
           <div className="box">{tenses.toString()} </div>
           <CheckBox
-            label="Random order"
+            label="Orden aleatorio"
             value={checked}
             onChange={() => handleChange(checked)}
           />
-          {/* <form onSubmit={(e) => generateTense(e)}>
-          <label htmlFor="gernerator">gernerator</label>
-          <input ref={generator} name="generator"></input>
-          <button type="submit">Submit</button>
-        </form> */}
+          <button id="restart" className="btn" onClick={() => window.location.reload(false)}>Restart</button>
         </section>
       </div>
       <FlashcardsList flashcards={flashcards} />

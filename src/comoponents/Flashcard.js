@@ -31,10 +31,10 @@ export default function Flashcard({ flashcard, nr }) {
                 ref={heightRef}>
                 <div className='front'>
                     <p className="word">
-                        {`Word: ${flashcard.word || "error"}`}
+                        Verbo: <span className='textBig'> {flashcard.word || "error"}</span>
                     </p>
                     <p className="tense">
-                        {`Tense: ${flashcard.tense || "error"}`}
+                        Tiempo: <span className='textBig'>{flashcard.tense || "error"}</span>
                     </p>
                 </div >
                 <div className='back'>

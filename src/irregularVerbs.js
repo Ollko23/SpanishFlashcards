@@ -20,20 +20,13 @@ export const verbs = {
         exceptions: ["estar", "tener", "andar", "venir", "poder", "poner", "querer", "saber", "decir", "traer", "conducir", "producir"],
         conPretIndef(verb) {
             let o = verbs.pretéritoIndefinido
-            if (o[verb].length != 6) {
-                console.log("conjugation")
+            if (o[verb].length !== 6) {
                 let newWord = []
                 let endings = ["e", "iste", "o", "imos", "isteis", "ieron"]
                 let root = o[verb]
                 if (o.loseI.includes(verb)) {
                     console.log("looseI")
-                    endings.map((e, i) => {
-                        if (i < 5) {
-                            newWord.push(root + e)
-                        } else {
-                            newWord.push(root + e.slice(1))
-                        }
-                    })
+                    endings.map((e, i) => { i < 5 ? newWord.push(root + e) : newWord.push(root + e.slice(1)) })
                 }
                 endings.map((e) => newWord.push(root + e))
                 return newWord
