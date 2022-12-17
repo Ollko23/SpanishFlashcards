@@ -1,0 +1,184 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+/* >> Flashcards <<*/
+
+.flashcards-list {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2vh;
+    border-top: 1px solid;
+    --marginFLashcard: 1vw;
+}
+
+.flashcard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: .25rem;
+    min-height: 7rem;
+    margin: var(--marginFLashcard);
+    transform-style: preserve-3d;
+    transition: 250ms;
+    cursor: pointer;
+    transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+}
+
+.flashcard::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("./bckimg_fc.jpg") center center/cover no-repeat;
+    filter: blur(3px);
+}
+
+.covered {
+    --newHeight: ;
+    --newWidth: ;
+    cursor: pointer;
+    margin: var(--marginFLashcard);
+    z-index: 1;
+    position: absolute;
+    content: "";
+    background-color: red;
+    min-height: var(--newHeight);
+    min-width: var(--newWidth);
+    border-radius: .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: url("./bckimg_fc.jpg") center center/cover no-repeat;
+}
+
+.flashcard.flip {
+    --rotate-y: 180deg;
+}
+
+.flashcard .front,
+.flashcard .back {
+    position: absolute;
+    padding: .2rem;
+    backface-visibility: hidden;
+}
+
+.flashcard .front>p:first-child {
+    padding-bottom: 5px;
+}
+
+.flashcard .back {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
+}
+
+.flashcard .back div {
+    display: flex;
+    flex-direction: column;
+}
+
+.flashcard .back div p:nth-child(2n) {
+    padding: 5px 0px;
+}
+
+
+.flashcard .back {
+    transform: rotateY(180deg);
+}
+
+/* >> Features << */
+.features {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    width: 30vw;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 1%;
+    border: 2px solid grey;
+    border-radius: 10px;
+    background-color: rgba(144, 149, 150, 0.6);
+    box-shadow: rgba(17, 12, 46, 0.15) 15px 15px 50px 0px;
+}
+
+
+.features:hover {
+    background-color: rgba(144, 149, 150, 0.9);
+    box-shadow: rgba(17, 12, 46, 0.15) 15px 15px 50px 10px;
+}
+
+.features * {
+    padding: 1% 0;
+
+}
+
+.words form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.words form textarea {
+    height: auto;
+    width: 15vw;
+    padding: 2%;
+}
+
+.btn {
+    align-self: center;
+    background-color: #fff;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border: 2px solid;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 23px;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+}
+
+.btn:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.box {
+    margin: auto;
+    border: 1px solid;
+    width: 70%;
+    text-align: center;
+    background-color: #fff;
+}
+
+/* >> top << */
+.top {
+    padding: 5vh;
+    background: url("./bckimg_top.jpg") center center/cover no-repeat;
+}
