@@ -23,7 +23,6 @@ const convert = (verb, tense, setWords) => {
                     }
                     return newWord
                 default: {
-                    // setWords(["ser"])
                     alert("wrong ending")
                     return newWord = []
 
@@ -76,14 +75,13 @@ const convert = (verb, tense, setWords) => {
         }
         conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon) }
     }
-
     class PresenteIndicativo {
         constructor(word) {
             this.word = word
             this.rule = {
-                ar: ["o", "as", "a", "amos", "ais", "an"],
-                er: ["o", "es", "e", "emos", "eis", "en"],
-                ir: ["o", "es", "e", "imos", "is", "en"]
+                ar: ["o", "as", "a", "amos", "áis", "an"],
+                er: ["o", "es", "e", "emos", "éis", "en"],
+                ir: ["o", "es", "e", "imos", "ís", "en"]
             }
             this.exceptions = {
                 tener: ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen"]
