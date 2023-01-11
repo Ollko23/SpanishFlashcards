@@ -13,7 +13,7 @@ export default function Flashcard({ flashcard, nr }) {
         r.forEach(i => i.style.setProperty('--newWidth', `${newWidth}px`))
     }
     useEffect(setMaxHigh, [])
-
+    console.log(flashcard.conjugation)
 
     return (
         <div>

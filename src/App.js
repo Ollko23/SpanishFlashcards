@@ -7,13 +7,13 @@ import MultiSelect from "./comoponents/MultiSelect";
 
 function App() {
 
-  const [words, setWords] = useState(["bailar"])
+  const [words, setWords] = useState(["sentir"])
   const [tenses, setTenses] = useState([])
   const [flashcards, setFlashcards] = useState([])
   const [checked, setChecked] = useState(false);
 
-  const arr = ["ser"]
-  const arr2 = ["Pretérito Indefinido"]
+  const arr = ["sentir"]
+  const arr2 = ["Presente Indicativo"]
 
   const wordsArea = useRef()
   const tensesArea = useRef()

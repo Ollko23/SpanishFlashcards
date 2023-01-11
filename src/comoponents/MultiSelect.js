@@ -50,8 +50,8 @@ export default function MultiSelect({ setTenses }) {
                 <div className="overSelect"></div>
             </div>
             <div id="mySelectOptions">
-                {/* <label htmlFor="one"><input type="checkbox" id="one" onChange={checkboxStatusChange} value="Presente Indicativo" /> Presente Indicativo</label>
-                <label htmlFor="two"><input type="checkbox" id="two" onChange={checkboxStatusChange} value="Pretérito Perfecto" /> Preterito Perfecto</label>
+                {<label htmlFor="one"><input type="checkbox" id="one" onChange={checkboxStatusChange} value="Presente Indicativo" /> Presente Indicativo</label>
+                /* <label htmlFor="two"><input type="checkbox" id="two" onChange={checkboxStatusChange} value="Pretérito Perfecto" /> Preterito Perfecto</label>
                 <label htmlFor="three"><input type="checkbox" id="three" onChange={checkboxStatusChange} value="Pretérito Imperfecto" /> Pretérito Imperfecto</label> */}
                 <label htmlFor="four"><input type="checkbox" id="four" onChange={checkboxStatusChange} value="Pretérito Indefinido" /> Pretérito Indefinido</label>
             </div>

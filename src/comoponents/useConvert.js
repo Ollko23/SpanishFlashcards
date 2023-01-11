@@ -1,34 +1,34 @@
 import { verbs } from "../irregularVerbs"
 
 const convert = (verb, tense, setWords) => {
-    function conRegular(exceptions, word, rule, exceptionsCon) {
+    function conRegular(exceptions, word, rule, exceptionsCon, check) {
         let newWord = []
+        let type = word.slice(-2)
+        let root = word.slice(0, verb.length - 2)
         if (!Object.keys(exceptions).includes(word)) {
-            let type = word.slice(-2)
-            let root = word.slice(0, verb.length - 2)
-            switch (type) {
-                case "ar":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(root + rule.ar[i])
-                    }
-                    return newWord
-                case "er":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(root + rule.er[i])
-                    }
-                    return newWord
-                case "ir":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(root + rule.ir[i])
-                    }
-                    return newWord
-                default: {
-                    alert("wrong ending")
-                    return newWord = []
 
+            if (check) {
+                check(root, newWord, type, word, rule)
+                if (newWord.length > 0) {
+                    return newWord
                 }
             }
-        } else { return exceptionsCon(word) }
+            if (newWord.length === 0) {
+                function con(rule) {
+                    rule && rule.forEach(e => newWord.push(root + e))
+                }
+                const obj = {
+                    "ar": rule.ar,
+                    "ár": rule.ar,
+                    "er": rule.er,
+                    "ér": rule.er,
+                    "ir": rule.ir,
+                    "ír": rule.ir,
+                }
+                con(obj[type])
+                return newWord
+            }
+        } else { return exceptionsCon(word, type, root, rule, newWord) }
     }
     function conPerfecto(exceptions, word, rule, ruleAux) {
         let newWord = []
@@ -73,7 +73,7 @@ const convert = (verb, tense, setWords) => {
             this.exceptions = verbs.pretéritoIndefinido
             this.exceptionsCon = verbs.pretéritoIndefinido.conPretIndef
         }
-        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon) }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, false) }
     }
     class PresenteIndicativo {
         constructor(word) {
@@ -84,11 +84,17 @@ const convert = (verb, tense, setWords) => {
                 ir: ["o", "es", "e", "imos", "ís", "en"]
             }
             this.exceptions = {
-                tener: ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen"]
+                tener: ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen"],
+                // sentir: [],
+                // pedir: [],
+                // reir: [],
             }
             //add exceptions
+            this.exceptions = verbs.presenteIndicativo
+            this.exceptionsCon = verbs.presenteIndicativo.conPresIndi //change to look through array
+            this.check = verbs.presenteIndicativo.check
         }
-        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule) }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
     }
     class PreteritoPerfecto {
         constructor(word) {
