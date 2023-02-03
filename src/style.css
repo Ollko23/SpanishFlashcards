@@ -179,7 +179,10 @@
 .box {
     margin: auto;
     border: 1px solid;
-    width: 70%;
+    min-height: 1.5rem;
+    height: auto;
+    min-width: 60%;
+    max-width: 90%;
     text-align: center;
     background-color: #fff;
 }
@@ -192,6 +195,20 @@
     font-size: .7rem;
     line-height: 15px;
 
+}
+
+.setBtns {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#num {
+    width: 15%
+}
+
+.random {
+    width: auto;
 }
 
 /* >> top << */

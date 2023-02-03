@@ -2,11 +2,11 @@ import React from 'react'
 
 export default function CheckBox({ label, value, onChange }) {
     return (
-        <label>
+        <div className='random'>
             <input type="checkbox"
                 checked={value}
                 onChange={onChange} />
             {label}
-        </label>
+        </div>
     )
 }

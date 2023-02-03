@@ -7,7 +7,7 @@
 
 .multiselect {
     position: relative;
-    z-index: 10;
+    z-index: 1;
     width: 20vw;
     /* display: grid;
     grid-template-columns: 15vw; */

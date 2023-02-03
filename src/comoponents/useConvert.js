@@ -1,22 +1,18 @@
 import { verbs } from "../irregularVerbs"
 
-const convert = (verb, tense, setWords) => {
+const convert = (verb, tense) => {
+
     function conRegular(exceptions, word, rule, exceptionsCon, check) {
-        let newWord = []
-        let type = word.slice(-2)
-        let root = word.slice(0, verb.length - 2)
+        const type = word.slice(-2)
+        const root = word.slice(0, word.length - 2)
+        const newWord = []
         if (!Object.keys(exceptions).includes(word)) {
 
             if (check) {
                 check(root, newWord, type, word, rule)
-                if (newWord.length > 0) {
-                    return newWord
-                }
             }
-            if (newWord.length === 0) {
-                function con(rule) {
-                    rule && rule.forEach(e => newWord.push(root + e))
-                }
+            if (newWord.length > 0) { return newWord }
+            else {
                 const obj = {
                     "ar": rule.ar,
                     "ár": rule.ar,
@@ -25,51 +21,31 @@ const convert = (verb, tense, setWords) => {
                     "ir": rule.ir,
                     "ír": rule.ir,
                 }
-                con(obj[type])
-                return newWord
+                return obj[type] ? obj[type].map(e => root + e) : ""
             }
-        } else { return exceptionsCon(word, type, root, rule, newWord) }
+        } else { return exceptionsCon(word, newWord, type, root, rule) }
     }
     function conPerfecto(exceptions, word, rule, ruleAux) {
-        let newWord = []
-        if (!Object.keys(exceptions).includes(word)) {
-            let type = word.slice(-2)
-            let root = word.slice(0, verb.length - 2)
-            switch (type) {
-                case "ar":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(`${ruleAux[i]} ${root}${rule.ar}`)
-                    }
-                    return newWord
-                case "er":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(`${ruleAux[i]} ${root}${rule.er}`)
-                    }
-                    return newWord
-                case "ir":
-                    for (let i = 0; i < 6; i++) {
-                        newWord.push(`${ruleAux[i]} ${root}${rule.ir}`)
-                    }
-                    return newWord
 
-                default: {
-                    setWords(["ser"])
-                    alert("wrong ending")
-                    return newWord = []
-                }
+        if (!Object.keys(exceptions).includes(word)) {
+            const type = word.slice(-2)
+            const root = word.slice(0, verb.length - 2)
+            const obj = {
+                "ar": rule.ar,
+                "ár": rule.ar,
+                "ér": rule.er,
+                "er": rule.er,
+                "ir": rule.ir,
+                "ír": rule.ir
             }
-        } else { return ruleAux.map(((e, i) => `${e[i]} ${exceptions[word]}`)) }
+            return obj[type] ? ruleAux.map(e => `${e} ${root}${obj[type]}`) : ""
+        } else { return ruleAux.map(e => `${e} ${exceptions[word]}`) }
     }
 
     class PreteritoIndefinido {
         constructor(word) {
             this.word = word
-            this.rule = {
-                ar: ["é", "aste", "ó", "amos", "asteis", "aron"],
-                er: ["í", "iste", "ió", "imos", "isteis", "ieron"],
-                ir: ["í", "iste", "ió", "imos", "isteis", "ieron"]
-            }
-            // add axeceptions
+            this.rule = verbs.pretéritoIndefinido.rule
             this.exceptions = verbs.pretéritoIndefinido
             this.exceptionsCon = verbs.pretéritoIndefinido.conPretIndef
         }
@@ -78,20 +54,9 @@ const convert = (verb, tense, setWords) => {
     class PresenteIndicativo {
         constructor(word) {
             this.word = word
-            this.rule = {
-                ar: ["o", "as", "a", "amos", "áis", "an"],
-                er: ["o", "es", "e", "emos", "éis", "en"],
-                ir: ["o", "es", "e", "imos", "ís", "en"]
-            }
-            this.exceptions = {
-                tener: ["tengo", "tienes", "tiene", "tenemos", "tenéis", "tienen"],
-                // sentir: [],
-                // pedir: [],
-                // reir: [],
-            }
-            //add exceptions
+            this.rule = verbs.presenteIndicativo.rule
             this.exceptions = verbs.presenteIndicativo
-            this.exceptionsCon = verbs.presenteIndicativo.conPresIndi //change to look through array
+            this.exceptionsCon = verbs.presenteIndicativo.conPresIndi
             this.check = verbs.presenteIndicativo.check
         }
         conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
@@ -99,67 +64,90 @@ const convert = (verb, tense, setWords) => {
     class PreteritoPerfecto {
         constructor(word) {
             this.word = word
-            this.rule = {
-                ar: ["ado"],
-                er: ["ido"],
-                ir: ["ido"]
-            }
+            this.rule = verbs.preteritoPerfecto.rule
             this.ruleAux = ["he", "has", "ha", "hemos", "habeis", "han"]
-            // add excpetions
-            this.exceptions = { tengo: ["tenido"] }
+            this.exceptions = verbs.preteritoPerfecto
         }
         conjuagtion() { return conPerfecto(this.exceptions, this.word, this.rule, this.ruleAux) }
-        // conjuagtion() {
-
-        //     let type = this.word.slice(-2)
-        //     let root = this.word.slice(0, verb.length - 2)
-        //     let newWord = []
-        //     switch (type) {
-        //         case "ar":
-        //             for (let i = 0; i < 6; i++) {
-        //                 newWord.push(`${this.ruleAux[i]} ${root}${this.rule.ar}`)
-        //             }
-        //             return newWord
-        //         case "er":
-        //             for (let i = 0; i < 6; i++) {
-        //                 newWord.push(`${this.ruleAux[i]} ${root}${this.rule.er}`)
-        //             }
-        //             return newWord
-        //         case "ir":
-        //             for (let i = 0; i < 6; i++) {
-        //                 newWord.push(`${this.ruleAux[i]} ${root}${this.rule.ir}`)
-        //             }
-        //             return newWord
-        //     }
-        // }
     }
     class PreteritoImperfecto {
         constructor(word) {
             this.word = word
-            this.rule = {
-                ar: ["aba", "abas", "aba", "abamos", "abais", "aban"],
-                er: ["ía", "ías", "ía", "íamos", "íais", "ían"],
-                ir: ["ía", "ías", "ía", "íamos", "íais", "ían"]
-            }
+            this.rule = verbs.preteritoImperfecto.rule
             //add exceptions
-            this.exceptions = {
-                ir: ["iba", "ibas", "iba", "íbamos", "ibais", "iban"],
-                ser: ["era", "eras", "era", "éramos", "erais", "eran"],
-                ver: ["veía", "veías", "veía", "veíamos", "veíais", "veían"],
-            }
+            this.exceptions = verbs.preteritoImperfecto
+            this.exceptionsCon = verbs.preteritoImperfecto.conPretImper
         }
-        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule) }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, false) }
     }
+    class IndicativoFuturo {
+        constructor(word) {
+            this.word = word
+            this.rule = verbs.futuroImperfecto.rule
+            //add exceptions
+            this.exceptions = verbs.futuroImperfecto
+            this.exceptionsCon = verbs.futuroImperfecto.conIndiFutu
+            this.check = verbs.futuroImperfecto.check
+        }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
+    }
+    class SubjuntivoPresente {
+        constructor(word) {
+            this.word = word
+            this.rule = verbs.subjuntivoPresente.rule
+            //add exceptions
+            this.exceptions = verbs.subjuntivoPresente
+            this.exceptionsCon = verbs.subjuntivoPresente.conSubjuntivoPresente
+            this.check = verbs.subjuntivoPresente.check
+        }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
+    }
+    class SubjuntivoPretéritoImperfecto {
+        constructor(word) {
+            this.word = word
+            this.rule = verbs.subjuntivoPretéritoImperfecto.rule
+            //add exceptions
+            this.exceptions = verbs.subjuntivoPretéritoImperfecto
+            this.exceptionsCon = verbs.subjuntivoPretéritoImperfecto.conSubjuntivoPretéritoImperfecto
+            this.check = verbs.subjuntivoPretéritoImperfecto.check
+        }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
+    }
+    class Imperativo {
+        constructor(word) {
+            this.word = word
+            this.rule = verbs.imperativo.rule
+            //add exceptions
+            this.exceptions = verbs.imperativo
+            this.exceptionsCon = verbs.imperativo.conImperativo
+            this.check = verbs.imperativo.check
+
+        }
+        conjuagtion() { return conRegular(this.exceptions, this.word, this.rule, this.exceptionsCon, this.check) }
+    }
+
+
     switch (tense) {
-        case "Presente Indicativo":
+        case "Presente":
             return new PresenteIndicativo(verb).conjuagtion()
-        case "Pretérito Perfecto":
+        case "Pretérito Perfecto Compuesto":
             return new PreteritoPerfecto(verb).conjuagtion()
         case "Pretérito Imperfecto":
             return new PreteritoImperfecto(verb).conjuagtion()
         case "Pretérito Indefinido":
             return new PreteritoIndefinido(verb).conjuagtion()
-        default: { alert("No such tense") }
+        case "Futuro Imperfecto":
+            return new IndicativoFuturo(verb).conjuagtion()
+        case "Presente de Subjuntivo":
+            return new SubjuntivoPresente(verb).conjuagtion()
+        case "Pretérito Imperfecto de Subjuntivo":
+            return new SubjuntivoPretéritoImperfecto(verb).conjuagtion()
+        case "Imperativo":
+            return new Imperativo(verb).conjuagtion()
+        default: {
+            console.log("error " + tense + verb)
+            // alert("No such tense")
+        }
     }
 }
 

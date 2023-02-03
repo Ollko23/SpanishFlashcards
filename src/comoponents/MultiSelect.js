@@ -2,27 +2,15 @@ import React from 'react'
 import "./multiSelect.css"
 export default function MultiSelect({ setTenses }) {
 
-    // add listener event
-    // document.addEventListener("click", function (event) {
-    //     let flyoutElement = document.getElementById('myMultiselect')
-    //     let targetElement = event.target
-    //     // console.log(flyoutElement)
-    //     console.log(event.target)
-    //     if (event.target === flyoutElement) {
-    //         toggleCheckboxArea()
-    //     }
-    // })
-
-    function toggleCheckboxArea() {
+    document.addEventListener("click", function (event) {
+        !event.target.className.includes("multi") && toggleCheckboxArea(true)
+    })
+    function toggleCheckboxArea(close) {
         var checkboxes = document.getElementById("mySelectOptions");
         var displayValue = checkboxes.style.display;
-
-        if (displayValue !== "grid") {
-            checkboxes.style.display = "grid";
-
-        } else {
-            checkboxes.style.display = "none";
-        }
+        (displayValue !== "grid" && !close) ?
+            checkboxes.style.display = "grid"
+            : checkboxes.style.display = "none"
     }
 
     function checkboxStatusChange() {
@@ -38,22 +26,26 @@ export default function MultiSelect({ setTenses }) {
             dropdownValue = values.join(", ")
         }
         multiselectOption.innerText = dropdownValue
-        setTenses(values)
+        setTenses(values.filter(Boolean))
     }
 
     return (
         <div id='myMultiselect' className='multiselect'>
-            <div id="mySelectLabel" className="selectBox" onClick={toggleCheckboxArea}>
+            <div id="mySelectLabel" className="selectBox" onClick={() => toggleCheckboxArea()}>
                 <select className="form-select">
                     <option id='o'>Choose the tenses</option>
                 </select>
-                <div className="overSelect"></div>
+                <div className="overSelect multi" id='overSelect'></div>
             </div>
             <div id="mySelectOptions">
-                {<label htmlFor="one"><input type="checkbox" id="one" onChange={checkboxStatusChange} value="Presente Indicativo" /> Presente Indicativo</label>
-                /* <label htmlFor="two"><input type="checkbox" id="two" onChange={checkboxStatusChange} value="Pretérito Perfecto" /> Preterito Perfecto</label>
-                <label htmlFor="three"><input type="checkbox" id="three" onChange={checkboxStatusChange} value="Pretérito Imperfecto" /> Pretérito Imperfecto</label> */}
-                <label htmlFor="four"><input type="checkbox" id="four" onChange={checkboxStatusChange} value="Pretérito Indefinido" /> Pretérito Indefinido</label>
+                {<label className="multi" htmlFor="one"><input type="checkbox" className="multi" id="one" onChange={checkboxStatusChange} value="Presente" /> Presente</label>}
+                {<label className="multi" htmlFor="two"><input type="checkbox" className="multi" id="two" onChange={checkboxStatusChange} value="Pretérito Perfecto Compuesto" /> Pretérito Perfecto Compuesto</label>}
+                {<label className="multi" htmlFor="three"><input type="checkbox" className="multi" id="three" onChange={checkboxStatusChange} value="Pretérito Imperfecto" /> Pretérito Imperfecto</label>}
+                {<label className="multi" htmlFor="four"><input type="checkbox" className="multi" id="four" onChange={checkboxStatusChange} value="Pretérito Indefinido" /> Pretérito Indefinido</label>}
+                {<label className="multi" htmlFor="five"><input type="checkbox" className="multi" id="five" onChange={checkboxStatusChange} value="Futuro Imperfecto" /> Futuro Imperfecto</label>}
+                {<label className="multi" htmlFor="six"><input type="checkbox" className="multi" id="six" onChange={checkboxStatusChange} value="Presente de Subjuntivo" /> Presente de Subjuntivo</label>}
+                {<label className="multi" htmlFor="seven"><input type="checkbox" className="multi" id="seven" onChange={checkboxStatusChange} value="Pretérito Imperfecto de Subjuntivo" /> Pretérito Imperfecto de Subjuntivo</label>}
+                {<label className="multi" htmlFor="eight"><input type="checkbox" className="multi" id="eight" onChange={checkboxStatusChange} value="Imperativo" /> Imperativo</label>}
             </div>
         </div>
     )
