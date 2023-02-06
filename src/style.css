@@ -209,11 +209,16 @@
 }
 
 #num {
-    width: 15%
+    width: 15%;
+    margin: 1vh;
 }
 
 .random {
     width: auto;
+}
+
+#random {
+    line-height: 15px;
 }
 
 /* >> top << */

@@ -84,53 +84,10 @@ function App() {
             onChange={() => handleChange(checked)}
           />
           <div className="setBtns">
-
             <SetsButton
               setWords={setWords}
               tenses={tenses}
             />
-            {/* <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="presenteIndicativo"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="preteritoPerfecto"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="preteritoImperfecto"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="futuroImperfecto"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="subjuntivoPresente"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="subjuntivoPretéritoImperfecto"
-              num={4}
-            />
-            <SetsButton
-              setTenses={setTenses}
-              setWords={setWords}
-              tense="imperativo"
-              num={4}
-            /> */}
           </div>
 
           <button id="restart" className="btn" onClick={() => window.location.reload(false)}>Restart</button>

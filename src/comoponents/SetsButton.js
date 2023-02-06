@@ -126,7 +126,7 @@ export default function SetsButton({ setWords, tenses }) {
     return (
         <div>
             <input type="number" id="num" name="number" placeholder='4' ref={num} />
-            <button onClick={() => handleClick(fy, num)}>Verbos Irregulares</button>
+            <button className={"btn"} id={"random"} onClick={() => handleClick(fy, num)}>Verbos Irregulares</button>
         </div>
     )
 }
