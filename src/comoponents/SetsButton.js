@@ -91,8 +91,7 @@ export default function SetsButton({ setWords, tenses }) {
     }
     let newWords = new Set([])
     const num = useRef()
-    let tensesArr = [...tenses]
-    for (let tense of tensesArr) {
+    for (let tense of [...tenses]) {
 
         let o = exceptions[tense] || undefined
         o && Object.keys(o.verbs).forEach(p => {

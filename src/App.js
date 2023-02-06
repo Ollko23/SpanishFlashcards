@@ -27,6 +27,7 @@ function App() {
 
   function submitWordsArea(e) {
     e.preventDefault()
+    setWords([])
     let newWords = wordsArea.current.value.replace(/,/g, " ").split(" ").filter(str => str !== "")
     setWords(newWords)
   }
