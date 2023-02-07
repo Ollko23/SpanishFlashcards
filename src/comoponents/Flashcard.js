@@ -37,14 +37,18 @@ export default function Flashcard({ flashcard, nr }) {
                 </div >
                 <div className='back'>
                     <div>
-                        <p>{`Yo ${flashcard.conjugation[0] || "error"}`}</p>
-                        <p>{`Tu ${flashcard.conjugation[1] || "error"}`}</p>
-                        <p>{`El/Ella ${flashcard.conjugation[2] || "error"}`}</p>
+                        <p><span className='mobile'>1 </span><span className='no-mobile'>Yo </span>{flashcard.conjugation[0] || "error"}</p>
+                        <p><span className='mobile'>2 </span><span className='no-mobile'>Tu </span>{flashcard.conjugation[1] || "error"}</p>
+                        <p><span className='mobile'>3 </span><span className='no-mobile'>El/Ella </span>{flashcard.conjugation[2] || "error"}</p>
+                        {/* <p>{`2 ${flashcard.conjugation[1] || "error"}`}</p>
+                        <p>{`3 ${flashcard.conjugation[2] || "error"}`}</p> */}
                     </div>
                     <div>
-                        <p>{`Nosotros ${flashcard.conjugation[3] || "error"}`}</p>
-                        <p>{`Vosotros ${flashcard.conjugation[4] || "error"}`}</p>
-                        <p>{`Ellas/Ellos ${flashcard.conjugation[5] || "error"}`}</p>
+                        <p><span className='mobile'>4 </span><span className='no-mobile'>Nosotros </span>{flashcard.conjugation[3] || "error"}</p>
+                        <p><span className='mobile'>5 </span><span className='no-mobile'>Vosotros </span>{flashcard.conjugation[4] || "error"}</p>
+                        <p><span className='mobile'>6 </span><span className='no-mobile'>Ellos </span>{flashcard.conjugation[5] || "error"}</p>
+                        {/* <p>{`2 ${flashcard.conjugation[4] || "error"}`}</p>
+                        <p>{`3 ${flashcard.conjugation[5] || "error"}`}</p> */}
                     </div>
                 </div>
             </div >

@@ -227,6 +227,12 @@
     background: url("./bckimg_top.jpg") center center/cover no-repeat;
 }
 
+/* setting */
+.mobile {
+    display: none;
+}
+
+
 @media only screen and (max-width: 768px) {
 
     /* features */
@@ -238,11 +244,26 @@
         width: 45vw;
     }
 
+    /* flashcards */
+
     .flashcard {
         font-size: .8rem;
     }
 
     .textBig {
         font-size: .8rem;
+    }
+
+    .flashcards-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* setting */
+    .no-mobile {
+        display: none;
+    }
+
+    .mobile {
+        display: inline;
     }
 }
